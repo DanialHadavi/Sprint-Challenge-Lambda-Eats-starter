@@ -79,7 +79,7 @@ export default function Form() {
     const newFormData = {
       ...formState,
       [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value
+        e.target.type === "name" ? e.target.value : e.target.value
     };
 
     validateChange(e);
