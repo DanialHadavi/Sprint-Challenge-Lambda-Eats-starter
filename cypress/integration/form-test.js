@@ -10,6 +10,21 @@ describe("Test our inputs and submit our form", () => {
     cy.get("textarea")
       .type("This is my special instruction")
       .should("have.value", "This is my special instruction");
-    cy.get("option").select("large");
+    cy.get("select")
+      .select("large")
+      .should("have.value", "large");
+    cy.get('input[name="pepperoni"]')
+      .check()
+      .should("be.checked");
+    cy.get('input[name="olives"]')
+      .check()
+      .should("be.checked");
+    cy.get('input[name="bacon"]')
+      .check()
+      .should("be.checked");
+    cy.get('input[name="sausage"]')
+      .check()
+      .should("be.checked");
+    cy.get('button[name="submit"]').click();
   });
 });

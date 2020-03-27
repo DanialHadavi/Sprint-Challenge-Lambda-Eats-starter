@@ -3,10 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 
 const formSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(2, "Name should be at least 2 characters")
-    .required("Name is a required"),
+  name: yup.string().min(2, "Name should be at least 2 characters"),
   olives: yup.boolean(),
   bacon: yup.boolean(),
   sausage: yup.boolean(),
@@ -58,7 +55,9 @@ export default function Form() {
   const validateChange = e => {
     yup
       .reach(formSchema, e.target.name)
-      .validate(e.target.name === "name" ? e.target.value : e.target.value)
+      .validate(
+        e.target.name === "checkbox" ? e.target.checked : e.target.value
+      )
 
       .then(valid => {
         setErrors({
@@ -79,7 +78,7 @@ export default function Form() {
     const newFormData = {
       ...formState,
       [e.target.name]:
-        e.target.type === "name" ? e.target.value : e.target.value
+        e.target.type === "checkbox" ? e.target.checked : e.target.value
     };
 
     validateChange(e);
@@ -154,7 +153,9 @@ export default function Form() {
       </label>
 
       <pre>{JSON.stringify(post, null, 2)}</pre>
-      <button disabled={buttonDisabled}>Order</button>
+      <button name="submit" disabled={buttonDisabled}>
+        Order
+      </button>
     </form>
   );
 }
